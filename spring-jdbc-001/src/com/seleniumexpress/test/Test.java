@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.seleniumexpress.dao.StudentDAOImpl;
+import com.seleniumexpress.service.StudentDAOHelper;
 
 public class Test {
 
@@ -12,14 +13,8 @@ public class Test {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		System.out.println("application context loaded....");
 		
-		StudentDAOImpl studentDAOImpl = context.getBean("studentDao", StudentDAOImpl.class);
+//		StudentDAOImpl studentDAOImpl = context.getBean("studentDao", StudentDAOImpl.class);
 		
-//		Student newStudent1 = new Student();
-//		newStudent1.setRollNo(005);
-//		newStudent1.setName("Sandra");
-//		newStudent1.setAddress("Chengdu");
-//		
-//		studentDAOImpl.insert(newStudent1);
 		
 		
 //		boolean isDeleted = studentDAOImpl.deleteRecordByRollNo(004);
@@ -30,7 +25,11 @@ public class Test {
 		
 //		studentDAOImpl.deleteRecordByStudentNameOrStudentAddress("eva", "denmark");
 		
-		studentDAOImpl.cleanUp();
+//		studentDAOImpl.cleanUp();
+		
+		
+		StudentDAOHelper studentDAOHelper = context.getBean("studentDAOHelper", StudentDAOHelper.class);
+		studentDAOHelper.setUpStudentTable();
 
 	}
 

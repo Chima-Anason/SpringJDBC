@@ -1,5 +1,8 @@
 package com.seleniumexpress.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -71,6 +74,28 @@ public class StudentDAOImpl implements StudentDAO {
 		
 		System.out.println("Table cleaned up>>> ");
 		
+		
+	}
+
+
+	@Override
+	public void batchInsert(List<Student> students) {
+		
+		String sql = "INSERT INTO STUDENT VALUES (?,?,?)";
+		
+		ArrayList<Object[]> sqlArgObjects = new ArrayList<>();
+		
+		for(Student tempStudent : students) {
+			
+			Object[] sudentData ={tempStudent.getRollNo(),tempStudent.getName(),tempStudent.getAddress()};
+			
+			sqlArgObjects.add(sudentData);
+		}
+		
+		jdbcTemplate.batchUpdate(sql, sqlArgObjects);
+		
+		
+		System.out.println("Batch insertion Completed !!!");
 		
 	}
 	
