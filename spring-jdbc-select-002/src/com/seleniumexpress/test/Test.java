@@ -26,8 +26,13 @@ public class Test {
 		//call findAllStudent() >> FETCHING THE DATA FROM THE TABLE
 		StudentDAOImpl studentDao = context.getBean("studentDao", StudentDAOImpl.class);
 		List<Student> studentList = studentDao.findAllStudent();
-		
 		helper.printStudents(studentList);
+		
+		
+		//QUERYING FOR A SPECIFIC OBJECT
+		System.out.println("Fetching the Student with a roll No 2");
+		Student student = studentDao.findStudentByRollNo(2);
+		System.out.println(student);
 		
 		
 		//CLEAN UP THE TABLE DATA
