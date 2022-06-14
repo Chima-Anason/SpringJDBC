@@ -16,9 +16,9 @@ public class Test {
 		StudentDAOImpl studentDAOImpl = context.getBean("studentDao", StudentDAOImpl.class);
 		
 		Student newStudent1 = new Student();
-		newStudent1.setRollNo(004);
-		newStudent1.setName("Abilash");
-		newStudent1.setAddress("Beijing");
+		newStudent1.setRollNo(005);
+		newStudent1.setName("Sandra");
+		newStudent1.setAddress("Chengdu");
 		
 		studentDAOImpl.insert(newStudent1);
 		
