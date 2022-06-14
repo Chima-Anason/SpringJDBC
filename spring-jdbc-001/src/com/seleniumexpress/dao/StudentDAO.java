@@ -7,4 +7,6 @@ public interface StudentDAO {
 	void insert(Student student);
 	
 	boolean deleteRecordByRollNo(int rollNo);
+	
+	int deleteRecordByStudentNameOrStudentAddress(String studentName, String studentAddress);
 }

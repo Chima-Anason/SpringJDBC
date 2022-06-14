@@ -23,10 +23,13 @@ public class Test {
 //		studentDAOImpl.insert(newStudent1);
 		
 		
-		boolean isDeleted = studentDAOImpl.deleteRecordByRollNo(004);
-		if(isDeleted) {
-			System.out.println("the roll no got deleted");
-		}
+//		boolean isDeleted = studentDAOImpl.deleteRecordByRollNo(004);
+//		if(isDeleted) {
+//			System.out.println("the roll no got deleted");
+//		}
+		
+		
+		studentDAOImpl.deleteRecordByStudentNameOrStudentAddress("eva", "denmark");
 
 	}
 
