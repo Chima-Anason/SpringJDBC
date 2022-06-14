@@ -3,7 +3,6 @@ package com.seleniumexpress.test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.seleniumexpress.api.Student;
 import com.seleniumexpress.dao.StudentDAOImpl;
 
 public class Test {
@@ -29,7 +28,9 @@ public class Test {
 //		}
 		
 		
-		studentDAOImpl.deleteRecordByStudentNameOrStudentAddress("eva", "denmark");
+//		studentDAOImpl.deleteRecordByStudentNameOrStudentAddress("eva", "denmark");
+		
+		studentDAOImpl.cleanUp();
 
 	}
 
