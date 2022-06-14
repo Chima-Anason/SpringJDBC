@@ -1,15 +1,18 @@
 package com.seleniumexpress.dao;
 
-import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.seleniumexpress.api.Student;
 
 public class StudentDAOImpl implements StudentDAO {
 	
-	private JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+	private JdbcTemplate jdbcTemplate;
+
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 
 	@Override
 	public void insert(Student student) {
@@ -26,16 +29,6 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 	
 	
-	public DataSource getDataSource(){
-		
-		String url = "jdbc:mysql://127.0.0.1:3306/School";
-		String username = "root";
-		String password = "rootuser";
-		
-		DataSource dataSource = new DriverManagerDataSource(url, username, password);
-		
-		
-		return dataSource;
-	}
+	
 
 }
