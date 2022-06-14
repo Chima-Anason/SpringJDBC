@@ -15,13 +15,18 @@ public class Test {
 		
 		StudentDAOImpl studentDAOImpl = context.getBean("studentDao", StudentDAOImpl.class);
 		
-		Student newStudent1 = new Student();
-		newStudent1.setRollNo(005);
-		newStudent1.setName("Sandra");
-		newStudent1.setAddress("Chengdu");
+//		Student newStudent1 = new Student();
+//		newStudent1.setRollNo(005);
+//		newStudent1.setName("Sandra");
+//		newStudent1.setAddress("Chengdu");
+//		
+//		studentDAOImpl.insert(newStudent1);
 		
-		studentDAOImpl.insert(newStudent1);
 		
+		boolean isDeleted = studentDAOImpl.deleteRecordByRollNo(004);
+		if(isDeleted) {
+			System.out.println("the roll no got deleted");
+		}
 
 	}
 

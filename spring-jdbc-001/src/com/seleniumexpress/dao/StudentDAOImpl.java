@@ -31,6 +31,19 @@ public class StudentDAOImpl implements StudentDAO {
 		System.out.println("No of roll inserted "+ noOfRollInserted);
 
 	}
+
+
+	@Override
+	public boolean deleteRecordByRollNo(int rollNo) {
+		
+		String sql = "DELETE FROM STUDENT WHERE ROLL_NO = ?";
+		
+		int noOfRowDeleted = jdbcTemplate.update(sql, rollNo);
+		
+		System.out.println("No of record deleted " + noOfRowDeleted);
+		
+		return noOfRowDeleted == 1;
+	}
 	
 	
 	
