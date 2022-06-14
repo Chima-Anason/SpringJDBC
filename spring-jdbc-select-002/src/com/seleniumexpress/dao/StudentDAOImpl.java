@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -104,10 +105,13 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public List<Student> findAllStudent() {
 		
-		String sql = "SELECT * FROM STUDENT";
+		String sql = "SELECT ROLL_NO as rollNo,"
+		         + " STUDENT_NAME as name,"
+		         + " STUDENT_ADDRESS as address "
+		         + "FROM STUDENT ";
 		
 		
-		List<Student> studentList = jdbcTemplate.query(sql, new StudentRowMapper());
+		List<Student> studentList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Student>(Student.class));
 		
 		return studentList;
 	}
@@ -116,9 +120,12 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public Student findStudentByRollNo(int roll_No) {
 		
-		String sql = "SELECT * FROM STUDENT WHERE ROLL_NO = ?";
+		String sql = "SELECT ROLL_NO as rollNo,"
+				         + " STUDENT_NAME as name,"
+				         + " STUDENT_ADDRESS as address "
+				         + "FROM STUDENT WHERE ROLL_NO = ?";
 		
-		Student student = jdbcTemplate.queryForObject(sql, new StudentRowMapper(), roll_No);
+		Student student = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Student>(Student.class), roll_No);
 		
 		return student;
 	}
