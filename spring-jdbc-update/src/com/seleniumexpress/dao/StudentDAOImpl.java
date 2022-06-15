@@ -1,13 +1,17 @@
 package com.seleniumexpress.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.seleniumexpress.api.Student;
 import com.seleniumexpress.resultsetextractor.StudentAddressResultSetExtractor;
@@ -162,6 +166,52 @@ public class StudentDAOImpl implements StudentDAO {
 		
 		
 		return jdbcTemplate.update(sql, args);
+	}
+
+
+	@Override
+	@Transactional
+	public int updateStudents(List<Student> studentList) {
+		
+		String sql = "UPDATE STUDENT SET STUDENT_ADDRESS = ? WHERE ROLL_NO = ?";
+		
+		int[] batchUpdate = jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				
+				// i need to set the args for the preparedStatement
+				
+				ps.setString(1, studentList.get(i).getAddress());
+				ps.setInt(2, studentList.get(i).getRollNo());
+				
+				System.out.println("Inside setValues() method");
+			}
+			
+			@Override
+			public int getBatchSize() {
+				
+				// in this method we need to define how many times our query will execute
+				// how many times the setValues() is gonna execute
+				
+				System.out.println("Inside getBatchSize() method >>>> "
+						+ "set value method will run for " + studentList.size() + " times");
+				
+				return studentList.size();
+			}
+		});
+		
+		int updatedRowCount = 0;
+		
+		for(int i = 0; i < batchUpdate.length; i++) {
+			
+			if(batchUpdate[i] == 1) {
+				
+				updatedRowCount++;
+			}
+		}
+		
+		return updatedRowCount;
 	}
 	
 	

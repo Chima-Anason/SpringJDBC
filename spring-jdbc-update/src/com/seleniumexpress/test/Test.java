@@ -1,5 +1,6 @@
 package com.seleniumexpress.test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,12 +25,29 @@ public class Test {
 		StudentDAOImpl studentDao = context.getBean("studentDao", StudentDAOImpl.class);
 		
 		Student peter = new Student();
-		peter.setAddress("Ekitti");
+		peter.setAddress("Shanghai333");
 		peter.setRollNo(6);
 		
-		int updateStudent = studentDao.updateStudent(peter);
+		Student james = new Student();
+		james.setAddress("Beijing333");
+		james.setRollNo(2);
 		
-		System.out.println(updateStudent + " Roll updated");
+		Student sam = new Student();
+		sam.setAddress("Hohhot333");
+		sam.setRollNo(7);
+		
+		
+		List<Student> studentList = new ArrayList<Student>();
+		studentList.add(peter);
+		studentList.add(james);
+		studentList.add(sam);
+		
+		//Starting Batch update
+		int updatedRowCount = studentDao.updateStudents(studentList);
+		System.out.println(updatedRowCount + " No of rows got affected....");
+		
+		//int updateStudent = studentDao.updateStudent(peter);
+		
 		
 		
 		

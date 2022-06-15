@@ -9,7 +9,7 @@ public interface StudentDAO {
 
 	void insert(Student student);
 	
-	void batchInsert(List<Student> students);
+	void batchInsert(List<Student> students); //Batch Insert
 	
 	boolean deleteRecordByRollNo(int rollNo);
 	
@@ -21,7 +21,9 @@ public interface StudentDAO {
 	
 	List<Student> findStudentByName(String name);
 	
-	Map<String,List<String>> groupStudentByAddress();
+	Map<String,List<String>> groupStudentByAddress(); //Address -> List<Student> Table
 	
 	int updateStudent(Student student);
+	
+	int updateStudents(List<Student> studentList); //Batch update
 }
