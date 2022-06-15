@@ -1,6 +1,7 @@
 package com.seleniumexpress.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.seleniumexpress.api.Student;
 
@@ -19,4 +20,6 @@ public interface StudentDAO {
 	Student findStudentByRollNo(int roll_No);
 	
 	List<Student> findStudentByName(String name);
+	
+	Map<String,List<String>> groupStudentByAddress();
 }

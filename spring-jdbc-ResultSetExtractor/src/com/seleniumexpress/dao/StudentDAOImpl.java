@@ -2,6 +2,7 @@ package com.seleniumexpress.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.seleniumexpress.api.Student;
+import com.seleniumexpress.resultsetextractor.StudentAddressResultSetExtractor;
 import com.seleniumexpress.resultsetextractor.StudentResultSetExtractor;
 import com.seleniumexpress.rowmapper.StudentRowMapper;
 
@@ -136,6 +138,17 @@ public class StudentDAOImpl implements StudentDAO {
 		
 		List<Student> studentList = jdbcTemplate.query(sql, new StudentResultSetExtractor(),name);
 		return studentList;
+	}
+
+
+	@Override
+	public Map<String, List<String>> groupStudentByAddress() {
+		
+		String sql = "SELECT * FROM STUDENT";
+		
+		Map<String, List<String>> query = jdbcTemplate.query(sql, new StudentAddressResultSetExtractor());
+		
+		return query;
 	}
 	
 	
